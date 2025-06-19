@@ -32,5 +32,5 @@ async def retrieve_memories(payload: RetrieveMemoriesPayload):
         filters={"user_id": DEFAULT_USER_ID},
         version="v2"
     )
-    memory = results[0]["memory"] if results else ""
+    memory = response[0]["memory"] if results else ""
     return {"memory": memory or "none"}
