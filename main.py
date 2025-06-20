@@ -15,7 +15,6 @@ class RetrieveMemoriesPayload(BaseModel):
 
 @app.post("/addMemories")
 async def add_memories(payload: AddMemoriesPayload):
-    print(f"[🧠 /addMemories] {payload.message}")
     await mem0.add(
         messages=[{"role": "user", "content": payload.message}],
         user_id=DEFAULT_USER_ID,
@@ -25,7 +24,6 @@ async def add_memories(payload: AddMemoriesPayload):
 
 @app.post("/retrieveMemories")
 async def retrieve_memories(payload: RetrieveMemoriesPayload):
-    print(f"[🔍 /retrieveMemories] {payload.query}")
     response = await mem0.search(
         query=payload.query,
         user_id=DEFAULT_USER_ID,
