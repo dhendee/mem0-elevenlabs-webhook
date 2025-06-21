@@ -11,6 +11,7 @@ DEFAULT_USER_ID = os.getenv("MEM0_DEFAULT_USER_ID", "demo_user_001")
 @app.post("/getDate")
 async def get_date(_: Request):
     now = datetime.utcnow().strftime("%B %d, %Y")
+    print(f"[📅 /getDate] → {now}")
     return {"date": now}
 
 class AddMemoriesPayload(BaseModel):
@@ -26,6 +27,7 @@ async def add_memories(payload: AddMemoriesPayload):
         user_id=DEFAULT_USER_ID,
         version="v2"
     )
+    print(f"[🧠 /addMemories] {payload.message}")
     return {"status": "stored"}
 
 @app.post("/retrieveMemories")
@@ -37,4 +39,5 @@ async def retrieve_memories(payload: RetrieveMemoriesPayload):
         version="v2"
     )
     memory = response[0]["memory"] if response else ""
+    print(f"[🔍 retrieveMemories] {memory}")
     return {"memory": memory or "none"}
