@@ -8,7 +8,7 @@ app = FastAPI()
 mem0 = AsyncMemoryClient(api_key=os.getenv("MEM0_API_KEY"))
 DEFAULT_USER_ID = os.getenv("MEM0_DEFAULT_USER_ID", "demo_user_001")
 
-@app.post("/getDate")
+@app.get("/getDate")
 async def get_date(_: Request):
     now = datetime.utcnow().strftime("%B %d, %Y")
     print(f"[📅 /getDate] → {now}")
