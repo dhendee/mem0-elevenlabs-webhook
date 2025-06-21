@@ -10,9 +10,14 @@ DEFAULT_USER_ID = os.getenv("MEM0_DEFAULT_USER_ID", "demo_user_001")
 
 @app.get("/getDate")
 async def get_date(_: Request):
-    now = datetime.utcnow().strftime("%B %d, %Y")
-    print(f"[📅 /getDate] → {now}")
-    return {"date": now}
+    now = datetime.utcnow()
+    date_str = now.strftime("%B %d, %Y")
+    weekday = now.strftime("%A")
+    print(f"[📅 /getDate] → {weekday}, {date_str}")
+    return {
+        "date": date_str,
+        "weekday": weekday
+    }
 
 class AddMemoriesPayload(BaseModel):
     message: str
